@@ -7,22 +7,25 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue';
+import AppHeader from './components/common/AppHeader.vue';
+
+var a = 'hi';
 
 export default {
-	name: 'App',
+	name: 'app',
 	components: {
 		HelloWorld,
+		AppHeader,
 	},
 	created() {
-		let a = 10;
-		console.log(a);
+		console.log('hi');
 	},
 };
 </script>
 
 <style>
 #app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;

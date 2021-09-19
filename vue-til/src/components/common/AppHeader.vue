@@ -1,12 +1,11 @@
 <template>
-	<div>headerr</div>
+  <div>
+    <router-link to="/login">로그인</router-link> |
+    <router-link to="/signup">회원 가입</router-link>
+  </div>
 </template>
 
 <script>
-import Demo from '../../demo/basic/Demo'
-import Demo from '@/demo/basic/Demo'
-// import Demo from '@/demo/basic/Demo'
-
 export default {};
 </script>
 

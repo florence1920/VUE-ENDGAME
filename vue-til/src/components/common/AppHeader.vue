@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <router-link to="/login">로그인</router-link> |
-    <router-link to="/signup">회원 가입</router-link>
+  <div class="headerWrap">
+    <router-link to="/main"><span>TIL</span></router-link>
+    <div class="routerWrap">
+      <router-link to="/login">Login</router-link>
+      <router-link to="/signup">Signup</router-link>
+    </div>
   </div>
 </template>
 
@@ -9,4 +12,25 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+.headerWrap {
+  height: 70px;
+  padding: 0 3% 0;
+  background: rgb(15, 195, 195);
+  color: #fff;
+  line-height: 70px;
+}
+.headerWrap span {
+  font-size: 30px;
+  font-weight: bold;
+}
+.routerWrap {
+  float: right;
+  font-weight: bold;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10% 0 0;
+}
+</style>

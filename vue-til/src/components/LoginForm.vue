@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="submitForm" class="formWrap">
     <div>
       <label for="username">id:</label>
       <input type="text" id="username" v-model="username" />
@@ -8,13 +8,20 @@
       <label for="password">pw:</label>
       <input type="text" id="password" v-model="password" />
     </div>
-    <button type="submit">로그인</button>
+    <button
+      v-bind:disabled="!isUsernameValid || !password"
+      type="submit"
+      class="btnWrap"
+    >
+      로그인
+    </button>
     {{ logMessage }}
   </form>
 </template>
 
 <script>
 import { loginUser } from '@/api/index';
+import { validateEmail } from '@/utils/validation.js';
 export default {
   data() {
     return {
@@ -24,16 +31,29 @@ export default {
       logMessage: '',
     };
   },
+  computed: {
+    isUsernameValid() {
+      return validateEmail(this.username);
+    },
+  },
   methods: {
     async submitForm() {
-      const Userdata = {
-        username: this.username,
-        password: this.password,
-      };
-      const { data } = await loginUser(Userdata);
-      console.log(data.user.username);
-      this.logMessage = `${data.user.username} 님환영합니다`;
-      this.initForm();
+      try {
+        const Userdata = {
+          username: this.username,
+          password: this.password,
+        };
+        const { data } = await loginUser(Userdata);
+        //메인 페이지로 이동 <router-link to></router-link>
+        console.log(data.user.username);
+        this.$router.push('/main');
+        //this.logMessage = `${data.user.username} 님환영합니다`;
+      } catch (error) {
+        //console.log(error.response.data);
+        this.logMessage = error.response.data;
+      } finally {
+        this.initForm();
+      }
     },
     initForm() {
       this.username = '';
@@ -43,4 +63,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.formWrap {
+  background: #fff;
+  padding: 5%;
+}
+label {
+  width: 80px;
+  display: inline-block;
+}
+</style>

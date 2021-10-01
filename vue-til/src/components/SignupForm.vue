@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="submitForm" class="formWrap">
     <div>
       <label for="username">id: </label>
       <input id="username" type="text" v-model="username" />
@@ -12,13 +12,19 @@
       <label for="nickname">nickname: </label>
       <input id="nickname" type="text" v-model="nickname" />
     </div>
-    <button type="submit">회원 가입</button>
+    <button
+      v-bind:disabled="!isUsernameValid || !password || !nickname"
+      type="submit"
+    >
+      회원 가입
+    </button>
     <p>{{ logMessage }}</p>
   </form>
 </template>
 
 <script>
 import { registerUser } from '@/api/index';
+import { validateEmail } from '@/utils/validation.js';
 export default {
   data() {
     return {
@@ -29,6 +35,11 @@ export default {
       //log
       logMessage: '',
     };
+  },
+  computed: {
+    isUsernameValid() {
+      return validateEmail(this.username);
+    },
   },
   methods: {
     async submitForm() {
@@ -54,4 +65,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.formWrap {
+  background: #fff;
+  padding: 5%;
+}
+label {
+  width: 80px;
+  display: inline-block;
+}
+</style>

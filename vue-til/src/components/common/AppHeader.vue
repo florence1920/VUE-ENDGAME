@@ -2,6 +2,7 @@
   <div class="headerWrap">
     <router-link to="/main"><span>TIL</span></router-link>
     <div class="routerWrap">
+      <span>{{ $store.state.username }}</span>
       <router-link to="/login">Login</router-link>
       <router-link to="/signup">Signup</router-link>
     </div>

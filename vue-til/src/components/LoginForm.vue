@@ -22,6 +22,7 @@
 <script>
 import { loginUser } from '@/api/index';
 import { validateEmail } from '@/utils/validation.js';
+import { saveAuthToCookie, saveUserToCookie } from '@/utils/cookies.js';
 export default {
   data() {
     return {
@@ -47,6 +48,9 @@ export default {
         console.log(data.token);
         this.$store.commit('setToken', data.token);
         this.$store.commit('setUsername', data.user.username);
+        //cookie 저장
+        saveAuthToCookie(data.token);
+        saveUserToCookie(data.user.username);
         //메인 페이지로 이동 <router-link to></router-link>
         this.$router.push('/main');
       } catch (error) {

@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .post {
   width: 100%;
   height: 150px;

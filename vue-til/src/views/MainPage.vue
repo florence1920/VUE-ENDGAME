@@ -13,6 +13,9 @@
         :postItem="postItem"
       ></PostListItem>
     </ul>
+    <div>
+      <router-link to="/add" class="create-button"> 생성하기 </router-link>
+    </div>
   </div>
 </template>
 
